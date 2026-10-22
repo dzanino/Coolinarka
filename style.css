@@ -8,3 +8,6 @@ h1{font:700 40px/1.15 ui-rounded,-apple-system,system-ui,sans-serif;margin:16px 
 .card{background:var(--card);border-radius:20px;padding:6px 20px;margin:12px 0}
 .card li{margin:12px 0}ul{padding-left:20px}
 a{color:var(--accent)}nav{margin-top:40px;padding-top:16px;border-top:1px solid var(--sep);color:var(--t2);font-size:15px}
+.lang{text-align:right;font-size:15px}.lang a{color:var(--t2)}
+details.card{padding:14px 20px}summary{cursor:pointer;font-weight:600}details p{color:var(--t2);margin:10px 0 4px}
+.upd{color:var(--t2);font-size:14px;margin-top:32px}
