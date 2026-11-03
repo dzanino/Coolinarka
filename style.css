@@ -11,3 +11,5 @@ a{color:var(--accent)}nav{margin-top:40px;padding-top:16px;border-top:1px solid 
 .lang{text-align:right;font-size:15px}.lang a{color:var(--t2)}
 details.card{padding:14px 20px}summary{cursor:pointer;font-weight:600}details p{color:var(--t2);margin:10px 0 4px}
 .upd{color:var(--t2);font-size:14px;margin-top:32px}
+.btn{display:block;text-align:center;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;font-size:19px;padding:16px 20px;border-radius:16px;margin:16px 0}
+.note{color:var(--t2)}.steps{padding-left:24px}.steps li{margin:10px 0}
