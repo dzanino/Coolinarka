@@ -1,7 +1,7 @@
 /* TEAM */
 Author: Ján Šikuta
 Contact: jansikuta@me.com
-Site: https://dzanino.github.io/Coolinarka/
+Site: https://coolinarka.eu/
 
 /* SITE */
 Last update: 2026-11-07

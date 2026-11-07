@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dzanino.github.io/Coolinarka/sitemap.xml
+Sitemap: https://coolinarka.eu/sitemap.xml
