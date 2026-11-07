@@ -1,0 +1,26 @@
+# Coolinarka
+
+> Recipes from Instagram, Facebook, the web and video in one place. Cook mode, shopping list and online shopping in the store's own language. For iPhone and iPad, free.
+
+Recipe app for iPhone and iPad (https://apps.apple.com/app/id6825835413). Free, with an optional one-time Plus purchase. No account and no ads. Recipes stay on the device and in the user's private iCloud. 14 languages: Slovensky, English, Čeština, Deutsch, Italiano, Polski, Magyar, Español, Français, Português, Українська, हिन्दी, 한국어, 简体中文.
+
+## Features
+- Saved with one tap: In Instagram, Facebook or Safari, tap Share and choose Coolinarka.
+- Recipe from video: A video or screen recording becomes a recipe, with speech transcribed right on your phone.
+- Weekly meal plan: Plan the whole week, fill empty slots from your favorites and send it all to your shopping list.
+- Sorted: Meal types, tags, favorites and your own collections.
+- Quick search: By name, ingredients or method, regardless of accents.
+- Widget and Siri: The What to cook today widget on your Home and Lock Screen, and Siri: "What should I cook in Coolinarka".
+- Send a recipe as a file: The recipient opens it in Coolinarka with its photo. Your ratings and notes stay out of it.
+- The cover photo you want: Crop, rotate and filters.
+- iPhone and iPad: Recipes sync through iCloud across devices with the same Apple account.
+- Import and export: Back up your collection or move it to another app.
+- 14 languages: Including the sample recipes and calorie estimates.
+
+## Pages
+- [Home](https://dzanino.github.io/Coolinarka/en/index.html)
+- [Support and FAQ](https://dzanino.github.io/Coolinarka/en/support.html)
+- [Privacy](https://dzanino.github.io/Coolinarka/en/privacy.html)
+- [Download](https://dzanino.github.io/Coolinarka/en/stiahnut.html)
+
+Author: Ján Šikuta (jansikuta@me.com)

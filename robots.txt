@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dzanino.github.io/Coolinarka/sitemap.xml
