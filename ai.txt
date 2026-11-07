@@ -1,7 +1,7 @@
 # ai.txt: Coolinarka
 # Usage policy for AI crawlers, assistants and training.
 
-Site: https://dzanino.github.io/Coolinarka/
+Site: https://coolinarka.eu/
 Owner: Ján Šikuta (jansikuta@me.com)
 Language: sk, en, cs, de, it, pl, hu, es, fr, pt-BR, uk, hi, ko, zh-Hans
 
@@ -11,5 +11,5 @@ Language: sk, en, cs, de, it, pl, hu, es, fr, pt-BR, uk, hi, ko, zh-Hans
 User-agent: *
 Allow: /
 
-LLMs: https://dzanino.github.io/Coolinarka/llms.txt
-Sitemap: https://dzanino.github.io/Coolinarka/sitemap.xml
+LLMs: https://coolinarka.eu/llms.txt
+Sitemap: https://coolinarka.eu/sitemap.xml
