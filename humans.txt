@@ -1,6 +1,6 @@
 /* TEAM */
 Author: Ján Šikuta
-Contact: jansikuta@me.com
+Contact: support@coolinarka.eu
 Site: https://coolinarka.eu/
 
 /* SITE */

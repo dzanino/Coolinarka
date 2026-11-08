@@ -2,7 +2,7 @@
 # Usage policy for AI crawlers, assistants and training.
 
 Site: https://coolinarka.eu/
-Owner: Ján Šikuta (jansikuta@me.com)
+Owner: Ján Šikuta (support@coolinarka.eu)
 Language: sk, en, cs, de, it, pl, hu, es, fr, pt-BR, uk, hi, ko, zh-Hans
 
 # Crawling, indexing, summarising and answering questions about this site: allowed.

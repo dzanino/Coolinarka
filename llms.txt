@@ -24,4 +24,4 @@ Recipe app for iPhone and iPad (https://apps.apple.com/app/id6825835413). Free, 
 - [Terms of use](https://coolinarka.eu/en/terms)
 - [Download](https://coolinarka.eu/en/stiahnut)
 
-Author: Ján Šikuta (jansikuta@me.com)
+Author: Ján Šikuta (support@coolinarka.eu)
