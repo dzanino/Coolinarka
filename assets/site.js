@@ -97,7 +97,30 @@
     var root = $("#cook"), R = D.recipe;
     if (!root || !R) return;
     var i = 0, text = $("[data-step]", root), count = $("[data-count]", root), bar = $(".bar i", root), back = $("[data-back]", root), next = $("[data-next]", root), tm = $("[data-timer]", root);
-    var left = 0, tick = null, ended = false;
+    var left = 0, tick = null, ended = false, audio = null;
+    function wake() {
+      try {
+        var A = window.AudioContext || window.webkitAudioContext;
+        if (!A) return;
+        audio = audio || new A();
+        if (audio.state === "suspended") audio.resume();
+      } catch (e) { audio = null; }
+    }
+    function ding() {
+      if (!audio) return;
+      try {
+        var t0 = audio.currentTime, out = audio.createGain();
+        out.gain.value = 0.35; out.connect(audio.destination);
+        [[1, 1, 1.6], [1.003, 0.6, 1.4], [2.76, 0.45, 0.7], [5.4, 0.22, 0.35], [8.93, 0.12, 0.18]].forEach(function (p) {
+          var o = audio.createOscillator(), g = audio.createGain();
+          o.type = "sine"; o.frequency.value = 1480 * p[0];
+          g.gain.setValueAtTime(0.0001, t0);
+          g.gain.linearRampToValueAtTime(p[1], t0 + 0.0015);
+          g.gain.exponentialRampToValueAtTime(0.0001, t0 + p[2] * 3);
+          o.connect(g); g.connect(out); o.start(t0); o.stop(t0 + 2.6);
+        });
+      } catch (e) {}
+    }
     function clock(s) { return Math.floor(s / 60) + ":" + ("0" + (s % 60)).slice(-2); }
     function drawTimer() {
       var sec = R.steps[i].seconds;
@@ -118,11 +141,12 @@
     next.addEventListener("click", function () { stop(); i = i === R.steps.length - 1 ? 0 : i + 1; draw(); });
     back.addEventListener("click", function () { stop(); i = Math.max(0, i - 1); draw(); });
     tm.addEventListener("click", function () {
+      wake();
       if (tick || ended) { stop(); drawTimer(); return; }
       left = R.steps[i].seconds;
       tick = setInterval(function () {
         left -= 5;
-        if (left <= 0) { clearInterval(tick); tick = null; ended = true; try { navigator.vibrate && navigator.vibrate(200); } catch (e) {} }
+        if (left <= 0) { clearInterval(tick); tick = null; ended = true; ding(); try { navigator.vibrate && navigator.vibrate(200); } catch (e) {} }
         drawTimer();
       }, 170);
       drawTimer();
