@@ -234,6 +234,13 @@
     $$("[data-gal]").forEach(function (b) { b.addEventListener("click", function () { step(+b.dataset.gal); }); });
   })();
   (function () {
+    fetch((D.root || "") + "android.json", { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (c) {
+      if (!c || typeof c.live !== "boolean") return;
+      $$("[data-android]").forEach(function (el) { el.hidden = (el.dataset.android === "live") !== c.live; });
+      if (c.live && typeof c.url === "string" && /^https:\/\/play\.google\.com\//.test(c.url)) $$("a[data-android=live], a[data-android-link]").forEach(function (a) { a.href = c.url; });
+    }).catch(function () {});
+  })();
+  (function () {
     var ua = navigator.userAgent || "", ios = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1), and = /Android/i.test(ua);
     var a = document.getElementById("android"), i = document.getElementById("ios");
     if (a && ios) a.hidden = true;

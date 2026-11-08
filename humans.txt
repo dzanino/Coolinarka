@@ -4,7 +4,7 @@ Contact: support@coolinarka.eu
 Site: https://coolinarka.eu/
 
 /* SITE */
-Last update: 2026-11-08
+Last update: 2026-11-09
 Language: sk, en, cs, de, it, pl, hu, es, fr, pt, uk, hi, ko, zh
 Hosting: GitHub Pages
 Standards: HTML5, CSS3, JSON-LD (schema.org)
