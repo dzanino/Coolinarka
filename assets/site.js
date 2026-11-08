@@ -97,17 +97,26 @@
     var root = $("#cook"), R = D.recipe;
     if (!root || !R) return;
     var i = 0, text = $("[data-step]", root), count = $("[data-count]", root), bar = $(".bar i", root), back = $("[data-back]", root), next = $("[data-next]", root), tm = $("[data-timer]", root);
-    var left = 0, tick = null, ended = false, audio = null;
+    var left = 0, tick = null, ended = false, audio = null, sound = null;
     function wake() {
       try {
         var A = window.AudioContext || window.webkitAudioContext;
         if (!A) return;
         audio = audio || new A();
         if (audio.state === "suspended") audio.resume();
+        if (!sound) {
+          sound = "loading";
+          fetch(root.getAttribute("data-ding") || "assets/timer_ding.wav").then(function (r) { return r.arrayBuffer(); })
+            .then(function (b) { audio.decodeAudioData(b, function (buf) { sound = buf; }, function () { sound = null; }); })
+            .catch(function () { sound = null; });
+        }
       } catch (e) { audio = null; }
     }
     function ding() {
       if (!audio) return;
+      if (sound && sound !== "loading") {
+        try { var src = audio.createBufferSource(); src.buffer = sound; src.connect(audio.destination); src.start(); return; } catch (e) {}
+      }
       try {
         var t0 = audio.currentTime, out = audio.createGain();
         out.gain.value = 0.35; out.connect(audio.destination);
