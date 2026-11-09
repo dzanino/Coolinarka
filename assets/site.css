@@ -56,7 +56,7 @@ section{padding-block:clamp(56px,9vw,112px);scroll-margin-top:72px}
 .who{display:flex;align-items:center;gap:10px;margin-bottom:12px;font-weight:600}.who i{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--soft);font-style:normal;font-size:1.2rem}
 .demo-act{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
 .recipe h3{font-size:1.5rem;margin-bottom:6px}.recipe .sum{color:var(--t2);font-size:.98rem;margin-bottom:14px}
-.recipe h4{margin:16px 0 6px;font:700 1rem var(--body);color:var(--hi)}
+.recipe h4{margin:16px 0 6px;font:700 1rem var(--body);color:color-mix(in srgb,var(--hi) 70%,var(--text))}
 .lines{list-style:none;margin:0;padding:0}.lines li{display:flex;gap:10px;align-items:baseline;padding:6px 0;border-bottom:1px solid var(--sep)}.lines li:last-child{border:0}
 .lines input{accent-color:var(--accent);width:20px;height:20px;flex:none;transform:translateY(3px)}.lines input:checked+span{text-decoration:line-through;color:var(--t2)}
 ol.steps{margin:0;padding-left:1.3em}ol.steps li{padding:5px 0}
