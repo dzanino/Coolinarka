@@ -1,0 +1,4 @@
+Contact: mailto:support@coolinarka.eu
+Expires: 2027-11-09T00:00:00.000Z
+Preferred-Languages: sk, en
+Canonical: https://coolinarka.eu/.well-known/security.txt
