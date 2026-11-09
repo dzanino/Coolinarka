@@ -76,7 +76,7 @@ ol.steps{margin:0;padding-left:1.3em}ol.steps li{padding:5px 0}
 .pick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}.pick label{font-size:.82rem;font-weight:700;color:var(--t2);display:grid;gap:4px}
 .pick select{min-height:46px;width:100%;padding:0 10px;border-radius:12px;border:1.5px solid var(--sep);background:var(--bg);color:var(--text);font:500 .98rem var(--body)}
 .shoplist{list-style:none;margin:0;padding:0}.shoplist li{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--sep)}.shoplist li:last-child{border:0}
-.shoplist input{width:22px;height:22px;accent-color:var(--accent)}.shoplist small{display:block;color:var(--t2);font-size:.82rem}.shoplist .term{color:var(--hi);font-weight:600;transition:opacity .25s}.shoplist li.off span{text-decoration:line-through;color:var(--t2)}
+.shoplist input{width:22px;height:22px;accent-color:var(--accent)}.shoplist small{display:block;color:var(--t2);font-size:.82rem}.shoplist .term{color:color-mix(in srgb,var(--hi) 70%,var(--text));font-weight:600;transition:opacity .25s}.shoplist li.off span{text-decoration:line-through;color:var(--t2)}
 .shoplist a{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--soft);color:var(--on-soft);text-decoration:none;font-weight:800}
 .video{margin-top:24px}.video video{border-radius:20px;width:100%;background:#000}
 .quiz{background:var(--accent);color:var(--on-accent)}.quiz .kicker,.quiz .lead{color:inherit;opacity:.9}
