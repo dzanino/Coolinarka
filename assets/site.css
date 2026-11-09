@@ -11,7 +11,7 @@ h1,h2,h3{font-family:var(--head);font-weight:700;line-height:1.1;letter-spacing:
 h1{font-size:clamp(2.5rem,6.2vw,4.5rem)}h2{font-size:clamp(2rem,4.4vw,3.25rem)}h3{font-size:1.2rem;line-height:1.25}
 p{margin:0}.wrap{max-width:1180px;margin:0 auto;padding-inline:var(--gut)}
 section{padding-block:clamp(56px,9vw,112px);scroll-margin-top:72px}
-.kicker{display:inline-block;font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:var(--hi);margin-bottom:12px}
+.kicker{display:inline-block;font-weight:700;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;color:color-mix(in srgb,var(--hi) 70%,var(--text));margin-bottom:12px}
 .lead{font-size:clamp(1.08rem,1.7vw,1.3rem);color:var(--t2);margin-top:16px;max-width:42em;text-wrap:pretty}
 .note{color:var(--t2);font-size:.9rem;margin-top:14px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:12px 26px;border:0;border-radius:999px;background:var(--accent);color:var(--on-accent);font:700 1.05rem var(--body);text-decoration:none;cursor:pointer;transition:transform .15s,box-shadow .2s;box-shadow:0 10px 24px -10px var(--accent)}
