@@ -2,7 +2,7 @@
 
 > Recipes from Instagram, Facebook, the web and video in one place. Cook mode, shopping list and online shopping in the store's own language. For iPhone and iPad, free.
 
-Recipe app for iPhone, iPad (https://apps.apple.com/app/id6825835413). Free, with an optional one-time Plus purchase. No account and no ads. Recipes stay on the device and in the user's private iCloud. 14 languages: Slovensky, English, Čeština, Deutsch, Italiano, Polski, Magyar, Español, Français, Português, Українська, हिन्दी, 한국어, 简体中文.
+Recipe app for iPhone and iPad (https://apps.apple.com/app/id6825835413) and Android (Google Play: https://play.google.com/store/apps/details?id=sk.sikuta.coolinarka; current Android availability: https://coolinarka.eu/android.json). Free, with an optional one-time Plus purchase. No account and no ads. Recipes stay on the device and in the user's private iCloud. 14 languages: Slovensky, English, Čeština, Deutsch, Italiano, Polski, Magyar, Español, Français, Português, Українська, हिन्दी, 한국어, 简体中文.
 
 ## Features
 - Saved with one tap: In Instagram, Facebook or Safari, tap Share and choose Coolinarka.

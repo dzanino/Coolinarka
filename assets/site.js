@@ -238,6 +238,17 @@
       if (!c || typeof c.live !== "boolean") return;
       $$("[data-android]").forEach(function (el) { el.hidden = (el.dataset.android === "live") !== c.live; });
       if (c.live && typeof c.url === "string" && /^https:\/\/play\.google\.com\//.test(c.url)) $$("a[data-android=live], a[data-android-link]").forEach(function (a) { a.href = c.url; });
+      if (c.live) $$('script[type="application/ld+json"]').forEach(function (s) {
+        try {
+          var ld = JSON.parse(s.textContent);
+          if (ld["@type"] !== "SoftwareApplication") return;
+          ld.operatingSystem = "iOS, iPadOS, Android";
+          var urls = [].concat(ld.downloadUrl || []);
+          if (urls.indexOf(c.url) < 0) urls.push(c.url);
+          ld.downloadUrl = urls;
+          s.textContent = JSON.stringify(ld);
+        } catch (e) {}
+      });
     }).catch(function () {});
   })();
   (function () {
