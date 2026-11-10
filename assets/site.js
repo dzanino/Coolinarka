@@ -236,7 +236,8 @@
   (function () {
     fetch((D.root || "") + "android.json", { cache: "no-cache" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (c) {
       if (!c || typeof c.live !== "boolean") return;
-      $$("[data-android]").forEach(function (el) { el.hidden = (el.dataset.android === "live") !== c.live; });
+      var state = c.live ? "live" : (c.test === true ? "test" : "soon");
+      $$("[data-android]").forEach(function (el) { el.hidden = el.dataset.android !== state; });
       if (c.live && typeof c.url === "string" && /^https:\/\/play\.google\.com\//.test(c.url)) $$("a[data-android=live], a[data-android-link]").forEach(function (a) { a.href = c.url; });
       if (c.live) $$('script[type="application/ld+json"]').forEach(function (s) {
         try {
