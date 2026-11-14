@@ -192,6 +192,18 @@
       });
     }
     cs.addEventListener("change", drawStores); ss.addEventListener("change", drawList);
+    // Ukážka „recept v jazyku stránky, nákup v Tescu v cudzine“: prepne krajinu a obchod a ukáže zoznam.
+    var preset = $("[data-preset]", root);
+    if (preset) {
+      if (!S.stores[preset.dataset.preset]) preset.hidden = true;
+      preset.addEventListener("click", function () {
+        cs.value = preset.dataset.preset;
+        drawStores();
+        var tesco = S.stores[cs.value].findIndex(function (s) { return s.name === "Tesco"; });
+        if (tesco > 0) { ss.value = tesco; drawList(); }
+        list.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      });
+    }
     drawStores();
   })();
   (function () {
