@@ -325,13 +325,13 @@
       .then(function (j) {
         done = true; clearTimeout(timer);
         if (!panel) return;
-        if (!j) { body.textContent = 'Počet návštev sa nepodarilo načítať.'; return; }
+        if (!j) { body.textContent = 'Počty sa nenačítali. Prehliadač ich môže blokovať (napríklad štíty v Brave), podrobná štatistika je na odkaze nižšie.'; return; }
         body.innerHTML = '<div style="display:grid;grid-template-columns:1fr auto;gap:2px 12px">' +
           '<span>Návštevníci spolu</span><b>' + fmt(j.count_unique || j.count) + '</b>' +
           (j.count_unique ? '<span>Zobrazenia stránok</span><b>' + fmt(j.count) + '</b>' : '') +
           '</div><div style="margin-top:8px;font-size:12px;opacity:.75">Celý web vrátane podstránok, od 15. 11. 2026. Roboty sa nepočítajú.</div>';
       })
-      .catch(function () { done = true; clearTimeout(timer); if (panel) body.textContent = 'Počítadlo práve neodpovedá, skúste neskôr.'; });
+      .catch(function () { done = true; clearTimeout(timer); if (panel) body.textContent = 'Počty sa nenačítali. Prehliadač ich môže blokovať (napríklad štíty v Brave), podrobná štatistika je na odkaze nižšie.'; });
   }
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
   var clicks = 0, timer = null;
