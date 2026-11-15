@@ -271,75 +271,78 @@
     if (i && and) i.hidden = true;
   })();
   (function () {
-    var API = "https://abacus.jasoncameron.dev", NS = "clk-web-7h4q", START = "2026-11-07";
-    var LIVE = /(^|\.)coolinarka\.eu$|^dzanino\.github\.io$/.test(location.hostname);
-    var OWN = "ck-own", SEEN = "ck-v";
-    function day(offset) {
-      var d = new Date(Date.now() - (offset || 0) * 86400000);
-      try { return new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Bratislava" }).format(d); } catch (e) { return d.toISOString().slice(0, 10); }
-    }
-    function key(ymd) { return "d" + ymd.replace(/-/g, ""); }
-    function session(k, v) {
-      try { if (v === undefined) return sessionStorage.getItem(k); sessionStorage.setItem(k, v); } catch (e) { return null; }
-    }
-    var ua = navigator.userAgent || "";
-    var bot = navigator.webdriver || /bot|crawl|spider|slurp|preview|lighthouse|headless|pingdom|monitor/i.test(ua);
-    if (LIVE && !bot && store.get(OWN) !== "1" && !session(SEEN)) {
-      session(SEEN, "1");
-      var opt = { mode: "cors", keepalive: true, credentials: "omit" };
-      ["tot", key(day(0)), "l-" + (D.lang || "sk")].forEach(function (k) {
-        fetch(API + "/hit/" + NS + "/" + k, opt).catch(function () {});
-      });
-    }
-    function get(k) {
-      return fetch(API + "/get/" + NS + "/" + k, { mode: "cors", credentials: "omit" })
-        .then(function (r) { return r.ok ? r.json() : { value: 0 }; })
-        .then(function (j) { return j && j.value > 0 ? j.value : 0; })
-        .catch(function () { return null; });
-    }
-    function fmt(n) { return n === null ? "-" : String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " "); }
-    var panel = null;
-    function close() { if (panel) { panel.remove(); panel = null; } }
-    function open() {
-      if (panel) return close();
-      if (store.get(OWN) === null) store.set(OWN, "1");
-      var langs = ["sk", "en", "cs", "de", "it", "pl", "hu", "es", "fr", "pt", "uk", "hi", "ko", "zh"];
-      panel = document.createElement("div");
-      panel.className = "fz";
-      panel.setAttribute("role", "dialog");
-      panel.innerHTML = '<div class="fzh"><b>Návštevnosť Coolinarka</b><button type="button" aria-label="Zavrieť">×</button></div><div data-x>Načítavam…</div>' +
-        '<label><input type="checkbox"> Nepočítať návštevy z tohto zariadenia</label>';
-      document.body.appendChild(panel);
-      $("button", panel).onclick = close;
-      var cb = $("input", panel);
-      cb.checked = store.get(OWN) === "1";
-      cb.onchange = function () { store.set(OWN, cb.checked ? "1" : "0"); };
-      var keys = ["tot"];
-      for (var i = 0; i < 7; i++) keys.push(key(day(i)));
-      keys = keys.concat(langs.map(function (l) { return "l-" + l; }));
-      Promise.all(keys.map(get)).then(function (v) {
+  var GC = 'https://coolinarka.goatcounter.com';
+  var HOST = false;                    // true: do cesty sa pridá hostiteľ (podweb na github.io)
+  var OWN = 'ck-own';                   // localStorage: '1' = nepočítať toto zariadenie
+  function store(kind, k, v) {
+    try {
+      var s = kind === 'l' ? window.localStorage : window.sessionStorage;
+      if (v === undefined) return s.getItem(k);
+      if (v === null) s.removeItem(k); else s.setItem(k, v);
+    } catch (e) { return null; }
+  }
+  function enc(x) { return encodeURIComponent(x || ''); }
+  // ---- count the page view ----
+  var ua = navigator.userAgent || '';
+  var isBot = navigator.webdriver || /bot|crawl|spider|slurp|preview|lighthouse|headless|pingdom|monitor/i.test(ua);
+  var local = /^(localhost|127\.|\[?::1|.*\.local$)/.test(location.hostname) || location.protocol === 'file:';
+  if (!isBot && !local && store('l', OWN) !== '1') {
+    var path = (HOST ? location.host : '') + location.pathname;
+    var ref = document.referrer && document.referrer.indexOf(location.origin) !== 0 ? document.referrer : '';
+    var url = GC + '/count?p=' + enc(path) + '&t=' + enc(document.title) + '&r=' + enc(ref) +
+      '&s=' + enc([screen.width, screen.height, window.devicePixelRatio || 1].join(',')) + '&b=0&rnd=' + Math.random().toString(36).slice(2);
+    try { if (!(navigator.sendBeacon && navigator.sendBeacon(url))) fetch(url, { mode: 'no-cors', keepalive: true, credentials: 'omit' }); } catch (e) {}
+  }
+  // ---- hidden panel ----
+  function fmt(n) { return n === null || n === undefined ? '–' : String(n).replace(/[^\d]/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+  var panel = null;
+  function close() { if (panel) { panel.remove(); panel = null; } }
+  function open() {
+    if (panel) return close();
+    if (store('l', OWN) === null) store('l', OWN, '1'); // first open: stop counting this device
+    panel = document.createElement('div');
+    panel.setAttribute('role', 'dialog');
+    panel.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:9999;max-width:320px;width:calc(100% - 32px);background:#1b1b1b;color:#fff;border-radius:14px;padding:16px 18px;font:14px/1.5 -apple-system,Helvetica,Arial,sans-serif';
+    panel.innerHTML =
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">' +
+        '<b style="font-size:15px">Návštevnosť Coolinarka</b>' +
+        '<button type="button" aria-label="Zavrieť" style="background:none;border:0;color:inherit;opacity:.7;font-size:20px;cursor:pointer;line-height:1">×</button>' +
+      '</div>' +
+      '<div data-x="body" style="opacity:.85">Načítavam…</div>' +
+      '<label style="display:flex;gap:8px;align-items:flex-start;margin-top:10px;font-size:12.5px;opacity:.75;cursor:pointer">' +
+        '<input type="checkbox" style="margin-top:3px"> Nepočítať návštevy z tohto zariadenia</label>' +
+      '<div style="margin-top:8px;font-size:12.5px"><a href="' + GC + '" target="_blank" rel="noopener" style="color:inherit">Podrobná štatistika (GoatCounter) →</a></div>';
+    document.body.appendChild(panel);
+    panel.querySelector('button').onclick = close;
+    var cb = panel.querySelector('input');
+    cb.checked = store('l', OWN) === '1';
+    cb.onchange = function () { store('l', OWN, cb.checked ? '1' : '0'); };
+    var body = panel.querySelector('[data-x="body"]');
+    var done = false;
+    var timer = setTimeout(function () { if (!done && panel) body.textContent = 'Počítadlo práve neodpovedá, skúste neskôr.'; }, 10000);
+    fetch(GC + '/counter/TOTAL.json', { mode: 'cors', credentials: 'omit' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) {
+        done = true; clearTimeout(timer);
         if (!panel) return;
-        var total = v[0], days = Math.max(1, Math.floor((Date.parse(day(0)) - Date.parse(START)) / 86400000) + 1);
-        var week = v.slice(1, 8).reduce(function (a, b) { return a + (b || 0); }, 0);
-        var avg = total === null ? null : (total / days).toFixed(1).replace(".", ",");
-        var since = START.split("-").reverse().map(Number).join(". ");
-        var rows = langs.map(function (l, i) { return { l: l, n: v[8 + i] }; }).filter(function (r) { return r.n > 0; })
-          .sort(function (a, b) { return b.n - a.n; }).map(function (r) { return r.l + " " + fmt(r.n); }).join(" · ");
-        $("[data-x]", panel).innerHTML = '<div class="fzg"><span>Celkom</span><b>' + fmt(total) + '</b><span>Denný priemer</span><b>' + (avg === null ? "-" : avg) +
-          '</b><span>Dnes</span><b>' + fmt(v[1]) + '</b><span>Včera</span><b>' + fmt(v[2]) + '</b><span>Posledných 7 dní</span><b>' + fmt(week) + '</b></div>' +
-          (rows ? '<p>Podľa jazyka: ' + rows + '</p>' : "") +
-          '<p>Počíta sa od ' + since + ' (' + days + (days === 1 ? " deň" : days < 5 ? " dni" : " dní") + '). Návšteva = prvé otvorenie webu v okne prehliadača; roboty sa nepočítajú.</p>';
-      });
-    }
-    document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
-    var clicks = 0, timer = null;
-    document.addEventListener("click", function (e) {
-      if (!e.target.closest || !e.target.closest("[data-fz]")) return;
-      clicks++;
-      clearTimeout(timer);
-      timer = setTimeout(function () { clicks = 0; }, 1200);
-      if (clicks >= 3) { clicks = 0; open(); }
-    });
-  })();
+        if (!j) { body.textContent = 'Počet návštev sa nepodarilo načítať.'; return; }
+        body.innerHTML = '<div style="display:grid;grid-template-columns:1fr auto;gap:2px 12px">' +
+          '<span>Návštevníci spolu</span><b>' + fmt(j.count_unique || j.count) + '</b>' +
+          (j.count_unique ? '<span>Zobrazenia stránok</span><b>' + fmt(j.count) + '</b>' : '') +
+          '</div><div style="margin-top:8px;font-size:12px;opacity:.75">Celý web vrátane podstránok, od 15. 11. 2026. Roboty sa nepočítajú.</div>';
+      })
+      .catch(function () { done = true; clearTimeout(timer); if (panel) body.textContent = 'Počítadlo práve neodpovedá, skúste neskôr.'; });
+  }
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+  var clicks = 0, timer = null;
+  document.addEventListener('click', function (e) {
+    var t = e.target && e.target.closest ? e.target.closest('[data-fz]') : null;
+    if (!t) return;
+    clicks++;
+    clearTimeout(timer);
+    timer = setTimeout(function () { clicks = 0; }, 1200);
+    if (clicks >= 3) { clicks = 0; open(); }
+  });
+})();
 })();
 document.querySelectorAll('[data-until]').forEach(function(el){if(Date.now()>=new Date(el.dataset.until+'T00:00:00+01:00').getTime())el.textContent=el.dataset.after;});
